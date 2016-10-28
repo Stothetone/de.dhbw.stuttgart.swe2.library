@@ -1,0 +1,35 @@
+repositories { mavenCentral() }
+
+println System.getProperty("java.version")
+
+apply plugin: 'java'
+
+sourceSets {
+	generated {
+		java {
+			srcDirs = ['src/main/generated']
+		}
+	}
+}
+
+dependencies {
+	compile 'org.hibernate:hibernate-core:+'
+	compile 'org.hibernate:hibernate-entitymanager:+'
+	compile 'com.google.inject:guice:+'
+//	compile 'javax.persistence:persistence-api:+'
+   	compile 'javax.validation:validation-api:+'
+  	compile 'org.apache.logging.log4j:log4j-api:2.+'
+  	compile 'org.apache.logging.log4j:log4j-core:2.+'
+//	compile 'org.slf4j:slf4j-log4j12:+'
+  	compile 'junit:junit:+'
+	runtime 'org.apache.derby:derby:10.11.+'
+	runtime 'org.apache.derby:derbyclient:10.11.+'
+	compile 'org.slf4j:slf4j-api:+'
+	
+//	compile 'org.apache.logging.log4j:log4j-api:2.+'
+//	compile 'org.apache.logging.log4j:log4j-core:2.+'
+	compile 'org.apache.logging.log4j:log4j-slf4j-impl:+'
+	//runtime 'org.apache.logging.log4j:log4j-slf4j-impl:+'
+}
+
+sourceSets.main.output.resourcesDir = sourceSets.main.output.classesDir
