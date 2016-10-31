@@ -2,9 +2,11 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Library extends AbstractIdentifiable{
 	
 	private String name;

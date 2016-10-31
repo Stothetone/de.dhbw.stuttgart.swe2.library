@@ -2,10 +2,12 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+@Entity
 public class LendingObject extends AbstractIdentifiable {
 
 	@OneToMany(targetEntity = LendingInformation.class)
