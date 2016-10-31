@@ -1,5 +1,8 @@
 package de.dhbw.stuttgart.swe2.library.jpa;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Book extends PrintMedia {
 	
 	private String ISBN;

@@ -2,9 +2,15 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.ManyToMany;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class CompactDisc extends Multimedia {
 
 	private Integer numberOfTitles;
+	
+	@ManyToMany(targetEntity = Title.class)
 	private List<Title> titles;
 
 	// shouldn't this be a derived attribute?? titles.size() ??

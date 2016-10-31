@@ -1,5 +1,8 @@
 package de.dhbw.stuttgart.swe2.library.jpa;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Multimedia extends ObjectInformation {
 	
 	private Integer numberOfDiscs;

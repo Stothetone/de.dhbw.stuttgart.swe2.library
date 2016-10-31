@@ -1,5 +1,8 @@
 package de.dhbw.stuttgart.swe2.library.jpa;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class PrintMedia extends ObjectInformation {
 	
 	private Integer pageNo;

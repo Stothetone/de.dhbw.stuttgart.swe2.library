@@ -2,11 +2,19 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Title extends AbstractIdentifiable {
 	
 	private String name;
 	private float duration;
+	
+	@ManyToMany(targetEntity = CompactDisc.class)
 	private List<CompactDisc> compactDiscs;
+	
+	@ManyToMany(targetEntity = Artist.class)
 	private List<Artist> artists;
 	
 	public String getName() {
