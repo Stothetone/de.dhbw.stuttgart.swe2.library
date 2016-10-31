@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 import org.junit.Test;
 
 import de.dhbw.stuttgart.swe2.library.jpa.AbstractIdentifiable;
-import de.dhbw.stuttgart.swe2.library.jpa.LebenVertragJPA;
+import de.dhbw.stuttgart.swe2.library.jpa.Library;
 
 public class PersistenceTest2 {
 
@@ -27,21 +27,21 @@ public class PersistenceTest2 {
 	}
 
 	@Test
-	public void testVertrag() {
-		AbstractIdentifiable vertrag = new LebenVertragJPA();
+	public void testLibrary() {
+		AbstractIdentifiable library = new Library();
 		EntityManager entityManager = factory.createEntityManager();
 		try {
 			EntityTransaction transaction = entityManager.getTransaction();
 			transaction.begin();
 			try {
-				entityManager.persist(vertrag);
+				entityManager.persist(library);
 				transaction.commit();
 			} finally {
 				if (transaction.isActive())
 					transaction.rollback();
 			}
-			AbstractIdentifiable reloaded = entityManager.find(LebenVertragJPA.class, vertrag.getId());
-			assertEquals(vertrag, reloaded);
+			AbstractIdentifiable reloaded = entityManager.find(Library.class, library.getId());
+			assertEquals(library, reloaded);
 		} finally {
 			entityManager.close();
 		}
