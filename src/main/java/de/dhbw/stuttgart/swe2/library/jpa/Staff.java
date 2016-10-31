@@ -3,14 +3,16 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Staff extends Person {
 	
 	private String persNo;
 	private float salary;
-	private List<LendingInformation> lendingInfo;
 	
+	@OneToMany(targetEntity = LendingInformation.class)
+	private List<LendingInformation> lendingInfo;
 	
 	public String getPersNo() {
 		return persNo;

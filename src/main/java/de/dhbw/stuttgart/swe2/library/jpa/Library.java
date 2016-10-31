@@ -2,6 +2,9 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 public class Library extends AbstractIdentifiable{
 	
 	private String name;
@@ -10,7 +13,11 @@ public class Library extends AbstractIdentifiable{
 	private String zipCode;
 	private String city;
 	private String phoneNo;
+	
+	@OneToMany(targetEntity = Staff.class)
 	private List<Staff> staff;
+	
+	@ManyToMany(targetEntity = LendingObject.class)
 	private List<LendingObject> lendingObject;
 	
 	public String getName() {

@@ -2,10 +2,19 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+@Entity
 public abstract class ObjectInformation extends AbstractIdentifiable {
 	
 	private String name;
+	
+	@ManyToMany(targetEntity = Publisher.class)
 	private List<Publisher> publishers;
+	
+	@OneToMany(targetEntity = LendingObject.class)
 	private List<LendingObject> lendigObjects;
 
 	public String getName() {

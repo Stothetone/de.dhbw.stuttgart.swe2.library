@@ -2,9 +2,15 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Publisher extends AbstractIdentifiable {
 	
 	private String name;
+	
+	@ManyToMany(targetEntity = ObjectInformation.class)
 	private List<ObjectInformation> objectInformation;
 	
 	public String getName() {

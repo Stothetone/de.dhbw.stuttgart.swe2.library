@@ -3,14 +3,18 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Customer extends Person {
 
 	private boolean active;
+	
+	@OneToMany(targetEntity = LendingInformation.class)
 	private List<LendingInformation> lendingInfo;
 	
-	
+	@OneToOne(targetEntity = IdCard.class)
 	private IdCard idCard;
 
 	public boolean isActive() {

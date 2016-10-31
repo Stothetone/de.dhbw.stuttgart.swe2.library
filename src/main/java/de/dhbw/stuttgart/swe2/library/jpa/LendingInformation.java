@@ -2,6 +2,10 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
+@Entity
 public class LendingInformation extends AbstractIdentifiable {
 	
 	private Date lendingDate;
@@ -9,8 +13,15 @@ public class LendingInformation extends AbstractIdentifiable {
 	private Date returnDate;
 	private float fee;
 	private State state;
+	
+	@OneToOne(targetEntity = Staff.class)
 	private Staff staff;
+	
+	@OneToOne(targetEntity = Customer.class)
 	private Customer customer;
+	
+	@OneToOne(targetEntity = LendingObject.class)
+	private LendingObject lendingObject;
 	
 	public Staff getStaff() {
 		return staff;
@@ -53,6 +64,12 @@ public class LendingInformation extends AbstractIdentifiable {
 	}
 	public void setState(State state) {
 		this.state = state;
+	}
+	public LendingObject getLendingObject() {
+		return lendingObject;
+	}
+	public void setLendingObject(LendingObject lendingObject) {
+		this.lendingObject = lendingObject;
 	}
 
 }
