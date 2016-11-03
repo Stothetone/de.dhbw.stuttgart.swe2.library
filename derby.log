@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Mon Oct 31 15:06:35 CET 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0158-1b10-2f77-0000062076c8 
-on database directory memory:C:\Users\jgerle\workspace\swe2\de.dhbw.stuttgart.swe2.library\simpleDb with class loader sun.misc.Launcher$AppClassLoader@3cd1a2f1 
-Loaded from file:/C:/Users/jgerle/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.11.1.1/df4b50061e8e4c348ce243b921f53ee63ba9bbe1/derby-10.11.1.1.jar
+Thu Nov 03 16:01:16 CET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0158-2ab5-5402-0000088a13f8 
+on database directory memory:E:\Eclipse_workspaces\de.dhbw.stuttgart.swe2.library\simpleDb with class loader sun.misc.Launcher$AppClassLoader@7440e464 
+Loaded from file:/E:/Eclipse_workspaces/de.dhbw.stuttgart.swe2.library/lib/derby-10.11.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_45-b15
-user.dir=C:\Users\jgerle\workspace\swe2\de.dhbw.stuttgart.swe2.library
-os.name=Windows 7
+java.runtime.version=1.8.0_40-b25
+user.dir=E:\Eclipse_workspaces\de.dhbw.stuttgart.swe2.library
+os.name=Windows 8.1
 os.arch=amd64
-os.version=6.1
+os.version=6.3
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

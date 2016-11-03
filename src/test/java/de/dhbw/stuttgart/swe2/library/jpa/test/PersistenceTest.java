@@ -14,8 +14,8 @@ import de.dhbw.stuttgart.swe2.library.jpa.Customer;
 
 public class PersistenceTest {
 
-	// private static final String PERSISTENCE_UNIT_NAME = "derby-embedded-inmemory";
-	private static final String PERSISTENCE_UNIT_NAME = "derby-network";
+	private static final String PERSISTENCE_UNIT_NAME = "derby-embedded-inmemory";
+	//private static final String PERSISTENCE_UNIT_NAME = "derby-network";
 
 	private static EntityManagerFactory factory;
 

@@ -2,10 +2,10 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
+@Entity
 public class CompactDisc extends Multimedia {
 
 	private Integer numberOfTitles;

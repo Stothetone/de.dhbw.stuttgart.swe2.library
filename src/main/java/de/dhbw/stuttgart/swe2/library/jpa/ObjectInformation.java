@@ -3,10 +3,13 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ObjectInformation extends AbstractIdentifiable {
 	
 	private String name;
