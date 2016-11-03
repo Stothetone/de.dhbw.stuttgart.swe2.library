@@ -19,7 +19,6 @@ public class LendingObject extends AbstractIdentifiable {
 	@ManyToOne(targetEntity = ObjectInformation.class)
 	private ObjectInformation objectInformation;
 
-	@OneToMany(targetEntity = LendingInformation.class)
 	public List<LendingInformation> getLendingInfo() {
 		return lendingInfo;
 	}

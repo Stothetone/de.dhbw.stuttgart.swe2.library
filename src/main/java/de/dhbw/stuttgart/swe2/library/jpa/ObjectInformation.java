@@ -18,7 +18,7 @@ public abstract class ObjectInformation extends AbstractIdentifiable {
 	private List<Publisher> publishers;
 	
 	@OneToMany(targetEntity = LendingObject.class)
-	private List<LendingObject> lendigObjects;
+	private List<LendingObject> lendingObjects;
 
 	public String getName() {
 		return name;
@@ -36,12 +36,12 @@ public abstract class ObjectInformation extends AbstractIdentifiable {
 		this.publishers = publishers;
 	}
 
-	public List<LendingObject> getLendigObjects() {
-		return lendigObjects;
+	public List<LendingObject> getLendingObjects() {
+		return lendingObjects;
 	}
 
-	public void setLendigObjects(List<LendingObject> lendigObjects) {
-		this.lendigObjects = lendigObjects;
+	public void setLendingObjects(List<LendingObject> lendigObjects) {
+		this.lendingObjects = lendigObjects;
 	}
 
 }

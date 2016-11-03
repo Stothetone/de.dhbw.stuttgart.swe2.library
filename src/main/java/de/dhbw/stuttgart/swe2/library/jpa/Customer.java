@@ -2,6 +2,7 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -14,7 +15,7 @@ public class Customer extends Person {
 	@OneToMany(targetEntity = LendingInformation.class)
 	private List<LendingInformation> lendingInfo;
 	
-	@OneToOne(targetEntity = IdCard.class)
+	@OneToOne(targetEntity = IdCard.class, cascade = CascadeType.ALL, mappedBy = "customer")
 	private IdCard idCard;
 
 	public boolean isActive() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Staff extends Person {
@@ -13,6 +14,17 @@ public class Staff extends Person {
 	
 	@OneToMany(targetEntity = LendingInformation.class)
 	private List<LendingInformation> lendingInfo;
+
+//  Not sure if this is needed
+//	@OneToOne(targetEntity = Library.class)
+//	private Library library;
+//	
+//	public Library getLibrary() {
+//		return library;
+//	}
+//	public void setLibrary(Library library) {
+//		this.library = library;
+//	}
 	
 	public String getPersNo() {
 		return persNo;
