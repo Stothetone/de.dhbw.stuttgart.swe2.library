@@ -2,9 +2,12 @@ package de.dhbw.stuttgart.swe2.library.jpa;
 
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Person extends AbstractIdentifiable {
 	
 	private Date birthday;

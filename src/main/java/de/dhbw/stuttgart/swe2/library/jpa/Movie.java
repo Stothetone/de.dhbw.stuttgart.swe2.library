@@ -1,8 +1,8 @@
 package de.dhbw.stuttgart.swe2.library.jpa;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
 
-@MappedSuperclass
+@Entity
 public class Movie extends Multimedia {
 	
 	private String type;
