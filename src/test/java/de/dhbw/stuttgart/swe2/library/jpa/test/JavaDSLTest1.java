@@ -1,8 +1,8 @@
 package de.dhbw.stuttgart.swe2.library.jpa.test;
 
+import static de.dhbw.stuttgart.swe2.javadsl.FromServiceImpl.from;
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,57 +13,69 @@ import javax.persistence.Persistence;
 import org.junit.Test;
 
 import de.dhbw.stuttgart.swe2.library.jpa.AbstractIdentifiable;
+import de.dhbw.stuttgart.swe2.library.jpa.Customer;
+import de.dhbw.stuttgart.swe2.library.jpa.LendingInformation;
 import de.dhbw.stuttgart.swe2.library.jpa.Library;
 import de.dhbw.stuttgart.swe2.library.jpa.Staff;
+import de.dhbw.stuttgart.swe2.javadsl.ToMany;
 
-public class PersistenceTest2 {
+public class JavaDSLTest1 {
 
 	//private static final String PERSISTENCE_UNIT_NAME = "derby-embedded-inmemory";
 	private static final String PERSISTENCE_UNIT_NAME = "derby-network";
 
 	private static EntityManagerFactory factory;
-
-	final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PersistenceTest2.class);
-
+	
+	private static ToMany<Library, Staff> staff()
+	{
+		return new LibraryToStaff(); 
+	}
+	
+	private static ToMany<Staff, LendingInformation> lendingInformation()
+	{
+		return new StaffToLendingInformation(); 
+	}
+	
+	private static class StaffToLendingInformation implements ToMany<Staff, LendingInformation>
+	{
+		@Override
+		public List<LendingInformation> get(Staff input) {
+			return input.getLendingInfo();
+		}
+	}
+	
+	private static class LibraryToStaff implements ToMany<Library, Staff>
+	{
+		@Override
+		public List<Staff> get(Library input) {
+			return input.getStaff();
+		}
+	}
+	
 	@org.junit.BeforeClass
 	public static void setup() {
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 	}
 
 	@Test
-	public void createLibrary() {
-		Library library = new Library();
-		library.setName("LibraryTest");
+	public void testLibrary() {
 		
-		List<Staff> staffList = new ArrayList<Staff>();
-		for(int i = 0; i < 5; i++)
-		{
-			Staff staff = new Staff();
-			Integer persNo = new Integer(i+1);
-			staff.setPersNo(persNo.toString());
-			staff.setSalary(i*500);
-			
-			staffList.add(staff);
-		}
-		library.setStaff(staffList);
+		Library lib = new Library();		
+		List<LendingInformation> lendingInformation = from(Library.class).join(staff()).join(lendingInformation()).get(lib);
+		
+		LendingInformation lendingOne = lendingInformation.get(0);
 
+		
 		EntityManager entityManager = factory.createEntityManager();
 		try {
 			EntityTransaction transaction = entityManager.getTransaction();
 			transaction.begin();
 			try {
-				for(Staff staff : library.getStaff())
-				{
-					entityManager.persist(staff);
-				}
-				entityManager.persist(library);
 				transaction.commit();
 			} finally {
 				if (transaction.isActive())
 					transaction.rollback();
 			}
-			AbstractIdentifiable reloaded = entityManager.find(Library.class, library.getId());
-			assertEquals(library, reloaded);
 		} finally {
 			entityManager.close();
 		}
