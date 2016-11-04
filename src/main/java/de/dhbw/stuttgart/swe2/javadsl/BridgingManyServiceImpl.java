@@ -33,7 +33,11 @@ public class BridgingManyServiceImpl<Input, Bridged, Output> implements ManyServ
 		List<Output> output = new ArrayList<Output>();
 		List<Bridged> list = first.get(input);
 		for (Bridged bridged : list) {
-			output.addAll(second.get(bridged));
+			
+			if(!bridged.equals(null))
+			{
+				output.addAll(second.get(bridged));
+			}
 		}
 		return output;
 	}

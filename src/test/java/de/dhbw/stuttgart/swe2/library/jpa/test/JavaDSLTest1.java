@@ -3,6 +3,7 @@ package de.dhbw.stuttgart.swe2.library.jpa.test;
 import static de.dhbw.stuttgart.swe2.javadsl.FromServiceImpl.from;
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,8 +16,10 @@ import org.junit.Test;
 import de.dhbw.stuttgart.swe2.library.jpa.AbstractIdentifiable;
 import de.dhbw.stuttgart.swe2.library.jpa.Customer;
 import de.dhbw.stuttgart.swe2.library.jpa.LendingInformation;
+import de.dhbw.stuttgart.swe2.library.jpa.LendingObject;
 import de.dhbw.stuttgart.swe2.library.jpa.Library;
 import de.dhbw.stuttgart.swe2.library.jpa.Staff;
+import de.dhbw.stuttgart.swe2.library.jpa.State;
 import de.dhbw.stuttgart.swe2.javadsl.ToMany;
 
 public class JavaDSLTest1 {
@@ -60,25 +63,70 @@ public class JavaDSLTest1 {
 	@Test
 	public void testLibrary() {
 		
-		Library lib = new Library();		
-		List<LendingInformation> lendingInformation = from(Library.class).join(staff()).join(lendingInformation()).get(lib);
+		Library library = new Library();
+		library.setName("LibraryTest");
 		
-		LendingInformation lendingOne = lendingInformation.get(0);
+		List<Staff> staffList = new ArrayList<Staff>();
+		Staff staff = null;
+		
 
+		List<LendingObject> lendingObjectList = new ArrayList<LendingObject>();
+		LendingObject lendingObject = new LendingObject();
+		List<LendingInformation> lendingInformationList = new ArrayList<LendingInformation>();
+		LendingInformation lendingInformation = new LendingInformation();
+		lendingInformation.setState(State.GOOD);
 		
-		EntityManager entityManager = factory.createEntityManager();
-		try {
-			EntityTransaction transaction = entityManager.getTransaction();
-			transaction.begin();
-			try {
-				transaction.commit();
-			} finally {
-				if (transaction.isActive())
-					transaction.rollback();
-			}
-		} finally {
-			entityManager.close();
+		for(int i = 0; i < 5; i++)
+		{
+			staff = new Staff();
+			Integer persNo = new Integer(i+1);
+			staff.setPersNo(persNo.toString());
+			staff.setSalary(i*500);
+			
+			staffList.add(staff);
+
+			lendingInformation.setStaff(staff);
+			lendingInformationList.add(lendingInformation);
 		}
+		
+		
+		lendingObject.setLendingInfo(lendingInformationList);
+		
+		lendingObjectList.add(lendingObject);
+		library.setLendingObject(lendingObjectList);
+		
+
+		library.setStaff(staffList);
+//
+//		EntityManager entityManager = factory.createEntityManager();
+//		try {
+//			EntityTransaction transaction = entityManager.getTransaction();
+//			transaction.begin();
+//			try {
+//				for(Staff staff : library.getStaff())
+//				{
+//					entityManager.persist(staff);
+//				}
+//				entityManager.persist(library);
+//				transaction.commit();
+//			} finally {
+//				if (transaction.isActive())
+//					transaction.rollback();
+//			}
+//			AbstractIdentifiable reloaded = entityManager.find(Library.class, library.getId());
+//			assertEquals(library, reloaded);
+//		} finally {
+//			entityManager.close();
+//		}
+		
+		lendingInformationList = null;
+		
+		//Library lib = new Library();
+				
+		lendingInformationList = from(Library.class).join(staff()).join(lendingInformation()).get(library);
+		
+		System.out.println(lendingInformationList.get(0).getStaff().getPersNo());
+
 	}
 
 }
