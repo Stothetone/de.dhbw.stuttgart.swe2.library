@@ -21,6 +21,7 @@ import de.dhbw.stuttgart.swe2.library.jpa.LendingObject;
 import de.dhbw.stuttgart.swe2.library.jpa.Library;
 import de.dhbw.stuttgart.swe2.library.jpa.Staff;
 import de.dhbw.stuttgart.swe2.library.jpa.State;
+import de.dhbw.stuttgart.swe2.javadsl.NameFilter;
 import de.dhbw.stuttgart.swe2.javadsl.ToMany;
 
 public class JavaDSLTest1 {
@@ -84,6 +85,14 @@ public class JavaDSLTest1 {
 			staff.setPersNo(persNo.toString());
 			staff.setSalary(i*500);
 			staff.setLendingInfo(lendingInformationList);
+			if(i == 3)
+			{
+				staff.setFirstName("Hanswurst");
+			}
+			else
+			{
+				staff.setFirstName("Depp");
+			}
 			
 			staffList.add(staff);
 
@@ -125,10 +134,11 @@ public class JavaDSLTest1 {
 		
 		//Library lib = new Library();
 				
-		lendingInformationList = from(Library.class).join(staff()).join(lendingInformation()).get(library);
+		lendingInformationList = from(Library.class).join(staff()).filter(new NameFilter()).join(lendingInformation()).get(library);
 		
-		System.out.println(lendingInformationList.get(0).getStaff().getPersNo());
-
+		System.out.println("-----------------------------------------------------");
+		System.out.println(lendingInformationList.get(0).getStaff().getFirstName());
+		System.out.println("-----------------------------------------------------");
 	}
 
 }

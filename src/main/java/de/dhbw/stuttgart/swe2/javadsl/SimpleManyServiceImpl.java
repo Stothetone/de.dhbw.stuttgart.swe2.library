@@ -1,6 +1,7 @@
 package de.dhbw.stuttgart.swe2.javadsl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, Output> {
@@ -24,6 +25,26 @@ public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, 
 
 	@Override
 	public List<Output> get(Input input) {
+		List<Output> unfilteredList = getUnfiltered(input);
+		List<Output> filteredList = new ArrayList<Output>();
+		for(Iterator<Output> iterator = unfilteredList.iterator(); iterator.hasNext();)
+		{
+			Output output = iterator.next();
+			boolean match = true;
+			for(Iterator<Filter<Output>> filterIterator = filters.iterator(); filterIterator.hasNext() && match;)
+			{
+				match = filterIterator.next().filter(output);
+			}
+			if(match)
+			{
+				filteredList.add(output);
+			}
+		}
+		
+		return filteredList;
+	}
+	
+	public List<Output> getUnfiltered(Input input){
 		return toMany.get(input);
 	}
 
