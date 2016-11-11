@@ -1,14 +1,22 @@
 package de.dhbw.stuttgart.swe2.javadsl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleManyServiceImpl<Input, Output> implements ManyService<Input, Output> {
 
 	public static <Input, Output> ManyService<Input, Output> from(ToMany<Input, Output> toMany) {
 		return new SimpleManyServiceImpl<Input, Output>(toMany);
-	}
+	}	
 
 	private ToMany<Input, Output> toMany;
+	private List<Filter<Output>> filters = new ArrayList<Filter<Output>>();
+
+	@Override
+	public ManyService<Input, Output> filter(Filter<Output> filter) {
+		filters.add(filter);
+		return this;
+	}
 
 	SimpleManyServiceImpl(ToMany<Input, Output> toMany) {
 		this.toMany = toMany;

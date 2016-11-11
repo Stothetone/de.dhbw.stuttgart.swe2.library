@@ -3,6 +3,7 @@ package de.dhbw.stuttgart.swe2.library.jpa.test;
 import static de.dhbw.stuttgart.swe2.javadsl.FromServiceImpl.from;
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Window.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,8 @@ import de.dhbw.stuttgart.swe2.javadsl.ToMany;
 
 public class JavaDSLTest1 {
 
-	//private static final String PERSISTENCE_UNIT_NAME = "derby-embedded-inmemory";
-	private static final String PERSISTENCE_UNIT_NAME = "derby-network";
+	private static final String PERSISTENCE_UNIT_NAME = "derby-embedded-inmemory";
+	//private static final String PERSISTENCE_UNIT_NAME = "derby-network";
 
 	private static EntityManagerFactory factory;
 	
@@ -82,6 +83,7 @@ public class JavaDSLTest1 {
 			Integer persNo = new Integer(i+1);
 			staff.setPersNo(persNo.toString());
 			staff.setSalary(i*500);
+			staff.setLendingInfo(lendingInformationList);
 			
 			staffList.add(staff);
 

@@ -7,6 +7,13 @@ public class BridgingManyServiceImpl<Input, Bridged, Output> implements ManyServ
 
 	private ManyService<Input, Bridged> first;
 	private ManyService<Bridged, Output> second;
+	private List<Filter<Output>> filters = new ArrayList<Filter<Output>>();
+
+	@Override
+	public ManyService<Input, Output> filter(Filter<Output> filter) {
+		filters.add(filter);
+		return this;
+	}
 
 	public BridgingManyServiceImpl(ManyService<Input, Bridged> first, ManyService<Bridged, Output> second) {
 		this.first = first;
@@ -33,11 +40,7 @@ public class BridgingManyServiceImpl<Input, Bridged, Output> implements ManyServ
 		List<Output> output = new ArrayList<Output>();
 		List<Bridged> list = first.get(input);
 		for (Bridged bridged : list) {
-			
-			if(!bridged.equals(null))
-			{
-				output.addAll(second.get(bridged));
-			}
+			output.addAll(second.get(bridged));
 		}
 		return output;
 	}
